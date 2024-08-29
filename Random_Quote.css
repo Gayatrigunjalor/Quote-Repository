@@ -1,0 +1,132 @@
+/* @import url(https://fonts.googleapis.com/css2?family=Crimson+Pro&display=swap ); */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(176, 176, 45);
+    font-family:"poppins",sans-serif;
+}
+
+.container{
+    max-width: 500px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgb(8, 8, 8);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.container h2{
+    font-size: 2rem;
+    text-align: center;
+    color: #50dcf4;
+}
+
+.quote_content{
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.quote_content p{
+
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0.2rem;
+    word-break: break-all;
+}
+
+.quote-icon{
+    font-size: 1.2rem;
+    color: #32e0dd;
+}
+
+.quote_content i:first-child{
+    margin: 3px 10px 0 0;
+}
+
+.quote_content i:last-child{
+    display: flex;
+    align-items: flex-end;
+    margin: 0px 0px 3px 10px;
+}
+
+.author{
+    text-align: center;
+    font-weight: 600;
+    padding: 1rem 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #619194;
+}
+
+.social_icons{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+}
+
+.social_icons ul{
+    list-style-type: none;
+    display: flex;
+}
+
+ul li{
+    width: 50px;
+    height: 50px;
+    border: 1px solid #328b93;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px 0px 0;
+    cursor: pointer;
+}
+ul li i{
+    color: #33dcce;
+    font-size: 1.2rem;
+}
+.social_icons button{
+    outline: none;
+    border: none;
+    font-family: "poppins" ,sans-serif;
+    background-color: #3bcfd1;
+    color: #f8f9ed;
+    padding: 0.9rem 2rem;
+    border-radius:  30px;
+    cursor: pointer;
+}
+.social_icons button:active,
+ul li :active {
+    transform: scale(0.98);
+}
+.message{
+ position: absolute;
+ top: 10px;
+ right: 0 ;
+ padding: 0.5rem;
+ background-color: #7de3ef ;
+  color:#2d2d2a ;
+  border-radius: 3px;
+  transform: translateX(200%);
+  transition: all 0.4s ease-in ;
+
+}
+.message.active{
+    transform: translateX(10%); 
+}
