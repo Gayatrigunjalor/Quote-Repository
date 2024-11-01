@@ -10,25 +10,34 @@ const messageEl = document.querySelector(".message");
 
 //-----Random Quote Generator----//
 async function randomQuote() {
-    btnQuote.textContent = "loading";
-    const data = await fetch("https://api.quotable.io/random");
-    const result = await data.json();
-    const { content, author } = result;
-    quoteTxt.textContent = content;
-    authorEl.textContent = author;
-    btnQuote.textContent = "New Quote";
+    try {
+        btnQuote.textContent = "Loading...";
+        const response = await fetch("https://api.quotable.io/random");
+        if (!response.ok) throw new Error("Failed to fetch quote.");
+        
+        const { content, author } = await response.json();
+        quoteTxt.textContent = content;
+        authorEl.textContent = author;
+    } catch (error) {
+        quoteTxt.textContent = "An error occurred. Please try again.";
+        authorEl.textContent = "";
+        console.error(error);
+    } finally {
+        btnQuote.textContent = "New Quote";
+    }
 }
 
 // Function to speak the quote
 function speechTxt() {
     let speechText = new SpeechSynthesisUtterance(quoteTxt.textContent);
-    window.speechSynthesis.addEventListener('voiceschanged', () => {
-        speechText.voice = window.speechSynthesis.getVoices()[0];
-        window.speechSynthesis.speak(speechText);
-    });
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length > 0) {
+        speechText.voice = voices[0];
+    }
+    window.speechSynthesis.speak(speechText);
 }
 
-//------Btn Events---------//
+
 
 // Copy quote to clipboard
 copyEl.addEventListener('click', () => {
@@ -39,13 +48,17 @@ copyEl.addEventListener('click', () => {
     }, 2500);
 });
 
-// Share quote on Twitter
+
 twitterEl.addEventListener("click", () => {
     let encodedContent = encodeURIComponent(quoteTxt.innerText);
     let tweet = `https://twitter.com/intent/tweet?text=${encodedContent}`;
     window.open(tweet, "_blank");
 });
 
-// Add event listeners
+
 speechEl.addEventListener("click", speechTxt);
 btnQuote.addEventListener("click", randomQuote);
+
+window.speechSynthesis.addEventListener('voiceschanged', () => {
+    speechTxt(); // Load voices initially
+});
